@@ -3,5 +3,4 @@
 SELECT band_name, (COALESCE(split, 2022) - formed) AS lifespan
 FROM holberton.metal_bands
 WHERE style LIKE '%Glam rock%'
-GROUP BY band_name
 ORDER BY lifespan DESC;
