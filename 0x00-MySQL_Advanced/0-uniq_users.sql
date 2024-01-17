@@ -1,5 +1,4 @@
 -- Make an attribute unique directly in the table schema
-
 -- Ensure database exists
 CREATE DATABASE IF NOT EXISTS holberton;
 -- Creating Table
