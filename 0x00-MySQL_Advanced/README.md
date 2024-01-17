@@ -28,7 +28,7 @@ This directory will cover advanced mysql topics that were not covered previously
   If the table already exists, your script should not fail
   Your script can be executed on any database
 * [2-fans.sql](2-fans.sql) - ranks country origins of bands, ordered by the number of (non-unique) fans
-* []() - 
+* [3-glam_rock.sql](3-glam_rock.sql) - lists all bands with Glam rock as their main style, ranked by their longevity
 * []() - 
 * []() - 
 * []() - 
