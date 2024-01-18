@@ -36,6 +36,6 @@ This directory will cover advanced mysql topics that were not covered previously
 * [8-index_my_names.sql](8-index_my_names.sql) - a SQL script that creates an index idx_name_first on the table names and the first letter of name
 * [9-index_name_score.sql](9-index_name_score.sql) - a SQL script that creates an index idx_name_first_score on the table names and the first letter of name and the score
 * [10-div.sql](10-div.sql) - a SQL script that creates a function SafeDiv that divides (and returns) the first by the second number or returns 0 if the second number is equal to 0
-* []() - 
+* [11-need_meeting.sql](11-need_meeting.sql) - a SQL script that creates a view need_meeting that lists all students that have a score under 80 (strict) and no last_meeting or more than 1 month.
 * []() - 
 * []() - 
