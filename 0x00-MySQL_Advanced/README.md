@@ -34,7 +34,7 @@ This directory will cover advanced mysql topics that were not covered previously
 * [6-bonus.sql](6-bonus.sql) - a SQL script that creates a stored procedure AddBonus that adds a new correction for a student.
 * [7-average_score.sql](7-average_score.sql) - a SQL script that creates a stored procedure ComputeAverageScoreForUser that computes and store the average score for a student. Note: An average score can be a decimal
 * [8-index_my_names.sql](8-index_my_names.sql) - a SQL script that creates an index idx_name_first on the table names and the first letter of name
-* []() - 
+* [9-index_name_score.sql](9-index_name_score.sql) - a SQL script that creates an index idx_name_first_score on the table names and the first letter of name and the score
 * []() - 
 * []() - 
 * []() - 
