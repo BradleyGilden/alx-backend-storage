@@ -1,1 +1,2 @@
+// show a list of databases in a cluster or single instance
 show dbs
