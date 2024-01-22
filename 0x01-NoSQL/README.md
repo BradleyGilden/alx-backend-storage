@@ -42,6 +42,15 @@ MongoDB is a NoSQL database (Not Only SQL). Data is not stored in tables and col
 * [9-insert_school.py](9-insert_school.py) - a Python function that inserts a new document in a collection based on kwargs
 * [10-update_topics.py](10-update_topics.py) - a Python function that changes all topics of a school document based on the name
 * [11-schools_by_topic.py](11-schools_by_topic.py) - Write a Python function that returns the list of school having a specific topic
-* []() - 
+* [12-log_stats.py](12-log_stats.py) - Write a Python script that provides some stats about Nginx logs stored in MongoDB:
+  * Database: logs
+  * Collection: nginx
+  * Display (same as the example):
+    * first line: x logs where x is the number of documents in this collection
+    * second line: Methods:
+    * 5 lines with the number of documents with the method = `["GET", "POST", "PUT", "PATCH", "DELETE"]` in this order (see example below - warning: it’s a tabulation before each line)
+    * one line with the number of documents with:
+      * method=GET
+      * path=/status
 * []() - 
 * []() - 

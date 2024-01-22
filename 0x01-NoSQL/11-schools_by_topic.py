@@ -11,7 +11,7 @@ from pymongo import MongoClient
 
 def schools_by_topic(mongo_collection, topic):
     """filters school docs by topic"""
-    return mongo_collection.find({"topics": {"$in": [topic]}})
+    return list(mongo_collection.find({"topics": {"$in": [topic]}}))
 
 
 if __name__ == "__main__":

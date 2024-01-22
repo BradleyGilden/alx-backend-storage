@@ -9,7 +9,7 @@ from pymongo import MongoClient
 
 def list_all(mongo_collection):
     """lists mongodb collections in a database"""
-    return mongo_collection.find()
+    return list(mongo_collection.find())
 
 
 if __name__ == "__main__":
