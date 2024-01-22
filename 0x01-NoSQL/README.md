@@ -52,5 +52,6 @@ MongoDB is a NoSQL database (Not Only SQL). Data is not stored in tables and col
     * one line with the number of documents with:
       * method=GET
       * path=/status
-* []() - 
-* []() - 
+* [100-find](100-find) - Write a script that lists all documents with name starting by Holberton in the collection school
+* [101-students.py](101-students.py) - Write a Python function that returns all students sorted by average score
+* [102-log_stats.py](102-log_stats.py) - Update 12-log_stats.py by adding the top 10 of the most present IPs in the collection nginx of the database logs
