@@ -30,10 +30,13 @@ MongoDB is a NoSQL database (Not Only SQL). Data is not stored in tables and col
 * [2-insert](2-insert) - Write a script that inserts a document in the collection school:
   * The document must have one attribute name with value “Holberton school”
   * The database name will be passed as option of mongo command
-* []() - 
-* []() - 
-* []() - 
-* []() - 
+* [3-all](3-all) - Write a script that lists all documents in the collection school
+* [4-match](4-match) - Write a script that lists all documents with name="Holberton school" in the collection school
+* [5-count](5-count) - Write a script that displays the number of documents in the collection school
+* [6-update](6-update) - Write a script that adds a new attribute to a document in the collection school:
+  * The script should update only document with name="Holberton school" (all of them)
+  * The update should add the attribute address with the value “972 Mission street”
+  * The database name will be passed as option of mongo command
 * []() - 
 * []() - 
 * []() - 
