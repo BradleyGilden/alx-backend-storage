@@ -9,7 +9,8 @@ from pymongo import MongoClient
 
 def insert_school(mongo_collection, **kwargs):
     """inserts a document into a collection"""
-    return mongo_collection.insert_one(kwargs)
+    ndoc = mongo_collection.insert_one(kwargs)
+    return ndoc.inserted_id
 
 
 if __name__ == "__main__":
