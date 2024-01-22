@@ -41,7 +41,7 @@ MongoDB is a NoSQL database (Not Only SQL). Data is not stored in tables and col
 * [8-all](8-all) - Write a Python function that lists all documents in a collection
 * [9-insert_school.py](9-insert_school.py) - a Python function that inserts a new document in a collection based on kwargs
 * [10-update_topics.py](10-update_topics.py) - a Python function that changes all topics of a school document based on the name
-* []() - 
+* [11-schools_by_topic.py](11-schools_by_topic.py) - Write a Python function that returns the list of school having a specific topic
 * []() - 
 * []() - 
 * []() - 
