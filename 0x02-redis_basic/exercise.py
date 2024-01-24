@@ -44,25 +44,37 @@ def call_history(method: Callable) -> Callable:
     return wrapper
 
 
-def replay(callable: Callable) -> None:
-    """displays the history of calls of a particular functon"""
-    key = callable.__qualname__
-    ikey = f"{key}:inputs"
-    okey = f"{key}:outputs"
-    # get reference to instance that called the method
-    obj = callable.__self__
+def replay(fn: Callable):
+    """display the history of calls of a particular function"""
+    r = redis.Redis()
+    function_name = fn.__qualname__
+    value = r.get(function_name)
+    try:
+        value = int(value.decode("utf-8"))
+    except Exception:
+        value = 0
 
-    # get list of inputs and outputs while mapping data to a string
-    ilist = list(
-        map(lambda a: a.decode("utf-8"), obj._redis.lrange(ikey, 0, -1))
-    )
-    olist = list(
-        map(lambda a: a.decode("utf-8"), obj._redis.lrange(okey, 0, -1))
-    )
-    callcount = len(ilist)
-    print(f"{key} was called {callcount} times")
-    for i, o in zip(ilist, olist):
-        print(f"{key}(*{i}) -> {o}")
+    # print(f"{function_name} was called {value} times")
+    print("{} was called {} times:".format(function_name, value))
+    # inputs = r.lrange(f"{function_name}:inputs", 0, -1)
+    inputs = r.lrange("{}:inputs".format(function_name), 0, -1)
+
+    # outputs = r.lrange(f"{function_name}:outputs", 0, -1)
+    outputs = r.lrange("{}:outputs".format(function_name), 0, -1)
+
+    for input, output in zip(inputs, outputs):
+        try:
+            input = input.decode("utf-8")
+        except Exception:
+            input = ""
+
+        try:
+            output = output.decode("utf-8")
+        except Exception:
+            output = ""
+
+        # print(f"{function_name}(*{input}) -> {output}")
+        print("{}(*{}) -> {}".format(function_name, input, output))
 
 
 class Cache:
