@@ -20,16 +20,5 @@ class Cache:
     def store(self, data: Union[str, bytes, int, float]) -> str:
         """stores a value assigned to a random uuid generated key"""
         key = str(uuid4())
-        self._redis.mset({key: data})
+        self._redis.set(key, data)
         return key
-
-
-if __name__ == '__main__':
-    cache = Cache()
-
-    data = b"hello"
-    key = cache.store(data)
-    print(key)
-
-    local_redis = Redis()
-    print(local_redis.get(key))
