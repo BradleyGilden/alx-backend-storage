@@ -14,7 +14,7 @@ RedisTypes = Union[str, bytes, int, float]
 
 
 def count_calls(method: Callable) -> Callable:
-    """decorator to count number of calls to database"""
+    """decorator to count number of calls to redis"""
     key = method.__qualname__
 
     @wraps(method)
@@ -22,6 +22,23 @@ def count_calls(method: Callable) -> Callable:
         """wrapper to preserve original functions documentation"""
         self._redis.incr(key)
         return method(self, *args, **kwargs)
+    return wrapper
+
+
+def call_history(method: Callable) -> Callable:
+    """
+    keeps track of function call inputs and their relative outputs
+    in a list
+    """
+    key = method.__qualname__
+
+    @wraps(method)
+    def wrapper(self, *args, **kwargs):
+        """wrapper to preserve original functions documentation"""
+        self._redis.rpush(f"{key}:inputs", str(args))
+        res = method(self, *args, *kwargs)
+        self._redis.rpush(f"{key}:outputs", str(res))
+        return res
     return wrapper
 
 
@@ -33,6 +50,7 @@ class Cache:
         self._redis = redis.Redis()
         self._redis.flushdb()
 
+    @call_history
     @count_calls
     def store(self, data: RedisTypes) -> str:
         """stores a value assigned to a random uuid generated key"""
@@ -40,6 +58,7 @@ class Cache:
         self._redis.set(key, data)
         return key
 
+    @call_history
     @count_calls
     def get(self, key: str, fn: Optional[Callable] = None) -> RedisTypes:
         """calls redis.get() with a function to convert the stored data"""
@@ -48,6 +67,7 @@ class Cache:
         data = self._redis.get(key)
         return data
 
+    @call_history
     @count_calls
     def get_int(self, key: str) -> int:
         """get a number"""
@@ -58,6 +78,7 @@ class Cache:
             value = 0
         return value
 
+    @call_history
     @count_calls
     def get_str(self, key: str) -> str:
         """get a string"""
