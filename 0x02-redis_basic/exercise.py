@@ -20,7 +20,7 @@ class Cache:
     def store(self, data: Union[str, bytes, int, float]) -> str:
         """stores a value assigned to a random uuid generated key"""
         key = str(uuid4())
-        self._redis.set(key, data)
+        self._redis.mset({key: data})
         return key
 
 
