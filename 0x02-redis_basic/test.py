@@ -11,10 +11,9 @@ Cache = __import__('exercise').Cache
 
 cache = Cache()
 
-TEST_CASES = {
-    "foo": None,
-    123: int,
-    "bar": lambda d: d.decode("utf-8")
-}
+cache.store(b"first")
+print(cache.get(cache.store.__qualname__))
 
-print(type(cache.get_int(cache.store("123"))))
+cache.store(b"second")
+cache.store(b"third")
+print(cache.get(cache.store.__qualname__))
