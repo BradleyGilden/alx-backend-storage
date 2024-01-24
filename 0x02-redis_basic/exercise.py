@@ -22,6 +22,7 @@ def count_calls(method: Callable) -> Callable:
         """wrapper to preserve original functions documentation"""
         self._redis.incr(key)
         return method(self, *args, **kwargs)
+
     return wrapper
 
 
@@ -39,7 +40,29 @@ def call_history(method: Callable) -> Callable:
         res = method(self, *args, *kwargs)
         self._redis.rpush(f"{key}:outputs", str(res))
         return res
+
     return wrapper
+
+
+def replay(callable: Callable) -> None:
+    """displays the history of calls of a particular functon"""
+    key = callable.__qualname__
+    ikey = f"{key}:inputs"
+    okey = f"{key}:outputs"
+    # get reference to instance that called the method
+    obj = callable.__self__
+
+    # get list of inputs and outputs while mapping data to a string
+    ilist = list(
+        map(lambda a: a.decode("utf-8"), obj._redis.lrange(ikey, 0, -1))
+    )
+    olist = list(
+        map(lambda a: a.decode("utf-8"), obj._redis.lrange(okey, 0, -1))
+    )
+    callcount = len(ilist)
+    print(f"{key} was called {callcount} times")
+    for i, o in zip(ilist, olist):
+        print(f"{key}(*{i}) -> {o}")
 
 
 class Cache:
@@ -73,7 +96,7 @@ class Cache:
         """get a number"""
         value = 0
         try:
-            value = self.get(key, lambda d: int(d.decode('utf-8')))
+            value = self.get(key, lambda d: int(d.decode("utf-8")))
         except Exception:
             value = 0
         return value
@@ -82,4 +105,4 @@ class Cache:
     @count_calls
     def get_str(self, key: str) -> str:
         """get a string"""
-        return self.get(key, lambda d: d.decode('utf-8'))
+        return self.get(key, lambda d: d.decode("utf-8"))
