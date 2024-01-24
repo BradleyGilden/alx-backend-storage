@@ -26,7 +26,7 @@ class Cache:
         self._redis.set(key, data)
         return key
 
-    def get(self, key: str, fn: Optional[Callable] = None):
+    def get(self, key: str, fn: Optional[Callable] = None) -> RedisTypes:
         """calls redis.get() with a function to convert the stored data"""
         if fn:
             return fn(self._redis.get(key))
